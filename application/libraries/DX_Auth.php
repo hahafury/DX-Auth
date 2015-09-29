@@ -197,7 +197,7 @@ class DX_Auth
 		if ( ! empty($data))
 		{
 			// Load model
-			$this->ci->load->model('dx_auth/users', 'users');
+			$this->ci->load->model('users', 'users');
 			// Update record
 			$this->ci->users->set_user($user_id, $data);
 		}
@@ -209,7 +209,7 @@ class DX_Auth
 		if ($this->ci->config->item('DX_count_login_attempts') AND ! $this->is_max_login_attempts_exceeded())
 		{
 			// Load model
-			$this->ci->load->model('dx_auth/login_attempts', 'login_attempts');		
+			$this->ci->load->model('login_attempts', 'login_attempts');
 			// Increase login attempts for current IP
 			$this->ci->login_attempts->increase_attempt($this->ci->input->ip_address());
 		}
@@ -221,7 +221,7 @@ class DX_Auth
 		if ($this->ci->config->item('DX_count_login_attempts'))
 		{
 			// Load model
-			$this->ci->load->model('dx_auth/login_attempts', 'login_attempts');		
+			$this->ci->load->model('login_attempts', 'login_attempts');
 			// Clear login attempts for current IP
 			$this->ci->login_attempts->clear_attempts($this->ci->input->ip_address());
 		}
@@ -232,8 +232,8 @@ class DX_Auth
 	function _get_role_data($role_id)
 	{
 		// Load models
-		$this->ci->load->model('dx_auth/roles', 'roles');
-		$this->ci->load->model('dx_auth/permissions', 'permissions');
+		$this->ci->load->model('roles', 'roles');
+		$this->ci->load->model('permissions', 'permissions');
 	
 		// Clear return value
 		$role_name = '';
@@ -351,7 +351,7 @@ class DX_Auth
 		);
 		
 		// Load Models
-		$this->ci->load->model('dx_auth/user_autologin', 'user_autologin');
+		$this->ci->load->model('user_autologin', 'user_autologin');
 
 		// Prune keys
 		$this->ci->user_autologin->prune_keys($user['user_id']);
@@ -379,7 +379,7 @@ class DX_Auth
 			if (isset($auto['key_id']) AND $auto['key_id'] AND $auto['user_id'])
 			{
 				// Load Models				
-				$this->ci->load->model('dx_auth/user_autologin', 'user_autologin');
+				$this->ci->load->model('user_autologin', 'user_autologin');
 
 				// Get key
 				$query = $this->ci->user_autologin->get_key($auto['key_id'], $auto['user_id']);								
@@ -410,7 +410,7 @@ class DX_Auth
 			$this->ci->load->helper('cookie');
 
 			// Load Models
-			$this->ci->load->model('dx_auth/user_autologin', 'user_autologin');
+			$this->ci->load->model('user_autologin', 'user_autologin');
 
 			// Extract data
 			$auto = unserialize($auto);			
@@ -773,8 +773,8 @@ class DX_Auth
 	function is_username_available($username)
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_temp', 'user_temp');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_temp', 'user_temp');
 
 		$users = $this->ci->users->check_username($username);
 		$temp = $this->ci->user_temp->check_username($username);
@@ -786,8 +786,8 @@ class DX_Auth
 	function is_email_available($email)
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_temp', 'user_temp');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_temp', 'user_temp');
 
 		$users = $this->ci->users->check_email($email);
 		$temp = $this->ci->user_temp->check_email($email);
@@ -798,7 +798,7 @@ class DX_Auth
 	// Check if login attempts bigger than max login attempts specified in config
 	function is_max_login_attempts_exceeded()
 	{
-		$this->ci->load->model('dx_auth/login_attempts', 'login_attempts');
+		$this->ci->load->model('login_attempts', 'login_attempts');
 		
 		return ($this->ci->login_attempts->check_attempts($this->ci->input->ip_address())->num_rows() >= $this->ci->config->item('DX_max_login_attempts'));
 	}
@@ -816,9 +816,9 @@ class DX_Auth
 	function login($login, $password, $remember = TRUE)
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_temp', 'user_temp');
-		$this->ci->load->model('dx_auth/login_attempts', 'login_attempts');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_temp', 'user_temp');
+		$this->ci->load->model('login_attempts', 'login_attempts');
 			
 		// Default return value
 		$result = FALSE;
@@ -932,8 +932,8 @@ class DX_Auth
 	function register($username, $password, $email)
 	{		
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_temp', 'user_temp');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_temp', 'user_temp');
 
 		$this->ci->load->helper('url');
 		
@@ -1019,7 +1019,7 @@ class DX_Auth
 		if ($login)
 		{
 			// Load Model
-			$this->ci->load->model('dx_auth/users', 'users');
+			$this->ci->load->model('users', 'users');
 			// Load Helper
 			$this->ci->load->helper('url');
 
@@ -1077,8 +1077,8 @@ class DX_Auth
 	function reset_password($username, $key = '')
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_autologin', 'user_autologin');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_autologin', 'user_autologin');
 		
 		// Default return value
 		$result = FALSE;
@@ -1106,8 +1106,8 @@ class DX_Auth
 	function activate($username, $key = '')
 	{		
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
-		$this->ci->load->model('dx_auth/user_temp', 'user_temp');
+		$this->ci->load->model('users', 'users');
+		$this->ci->load->model('user_temp', 'user_temp');
 		
 		// Default return value
 		$result = FALSE;
@@ -1149,7 +1149,7 @@ class DX_Auth
 	function change_password($old_pass, $new_pass)
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
+		$this->ci->load->model('users', 'users');
 		
 		// Default return value
 		$result = FAlSE;
@@ -1188,7 +1188,7 @@ class DX_Auth
 	function cancel_account($password)
 	{
 		// Load Models
-		$this->ci->load->model('dx_auth/users', 'users');
+		$this->ci->load->model('users', 'users');
 		
 		// Default return value
 		$result = FAlSE;
@@ -1310,7 +1310,7 @@ class DX_Auth
 	function user_activated($user_id)
 	{
 		// Load models
-		$this->ci->load->model('dx_auth/user_profile', 'user_profile');
+		$this->ci->load->model('user_profile', 'user_profile');
 		
 		// Create user profile
 		$this->ci->user_profile->create_profile($user_id);
@@ -1335,7 +1335,7 @@ class DX_Auth
 	function user_canceling_account($user_id)
 	{
 		// Load models
-		$this->ci->load->model('dx_auth/user_profile', 'user_profile');
+		$this->ci->load->model('user_profile', 'user_profile');
 		
 		// Delete user profile
 		$this->ci->user_profile->delete_profile($user_id);
