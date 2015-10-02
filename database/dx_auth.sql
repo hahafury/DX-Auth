@@ -79,12 +79,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL auto_increment,
   `role_id` int(11) NOT NULL default '1',
   `username` varchar(25) collate utf8_bin NOT NULL,
-  `password` varchar(34) collate utf8_bin NOT NULL,
+  `password` varchar(70) collate utf8_bin NOT NULL,
   `email` varchar(100) collate utf8_bin NOT NULL,
   `banned` tinyint(1) NOT NULL default '0',
   `ban_reason` varchar(255) collate utf8_bin default NULL,
-  `newpass` varchar(34) collate utf8_bin default NULL,
-  `newpass_key` varchar(32) collate utf8_bin default NULL,
+  `newpass` varchar(70) collate utf8_bin default NULL,
+  `newpass_key` varchar(70) collate utf8_bin default NULL,
   `newpass_time` datetime default NULL,
   `last_ip` varchar(40) collate utf8_bin NOT NULL,
   `last_login` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `email`, `banned`, `ban_reason`, `newpass`, `newpass_key`, `newpass_time`, `last_ip`, `last_login`, `created`, `modified`) VALUES
-(1, 2, 'admin', '$1$i75.Do4.$ROPRZjZzDx/JjqeVtaJLW.', 'admin@localhost.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2008-11-30 04:56:38', '2008-11-30 04:56:32', '2008-11-30 04:56:38'),
-(2, 1, 'user', '$1$bO..IR4.$CxjJBjKJ5QW2/BaYKDS7f.', 'user@localhost.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2008-12-01 14:04:14', '2008-12-01 14:01:53', '2008-12-01 14:04:14');
+(1, 2, 'admin', '$2a$08$uEOz2P4rg1zvjuhrjbp2xeXbsCmbgjzNArmBm0dZjaQDnJBKqGnGG', 'admin@localhost.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2008-11-30 04:56:38', '2008-11-30 04:56:32', '2008-11-30 04:56:38'),
+(2, 1, 'user', '$2a$08$uEOz2P4rg1zvjuhrjbp2xeXbsCmbgjzNArmBm0dZjaQDnJBKqGnGG', 'user@localhost.com', 0, NULL, NULL, NULL, NULL, '127.0.0.1', '2008-12-01 14:04:14', '2008-12-01 14:01:53', '2008-12-01 14:04:14');
 
 -- --------------------------------------------------------
 
@@ -146,9 +146,9 @@ INSERT INTO `user_profile` (`id`, `user_id`, `country`, `website`) VALUES
 CREATE TABLE IF NOT EXISTS `user_temp` (
   `id` int(11) NOT NULL auto_increment,
   `username` varchar(255) collate utf8_bin NOT NULL,
-  `password` varchar(34) collate utf8_bin NOT NULL,
+  `password` varchar(70) collate utf8_bin NOT NULL,
   `email` varchar(100) collate utf8_bin NOT NULL,
-  `activation_key` varchar(50) collate utf8_bin NOT NULL,
+  `activation_key` varchar(70) collate utf8_bin NOT NULL,
   `last_ip` varchar(40) collate utf8_bin NOT NULL,
   `created` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
