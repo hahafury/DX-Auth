@@ -1,0 +1,9 @@
+
+Updates needed for PHPASS
+
+ALTER  TABLE 
+`users`  CHANGE  `password`  `password` VARCHAR( 70  )  CHARACTER  SET utf8 COLLATE utf8_bin NOT  NULL ,
+CHANGE  `newpass`  `newpass` VARCHAR( 70  )  CHARACTER  SET utf8 COLLATE utf8_bin NULL  DEFAULT NULL ,
+CHANGE  `newpass_key`  `newpass_key` VARCHAR( 70  )  CHARACTER  SET utf8 COLLATE utf8_bin NULL  DEFAULT NULL ;
+`user_temp`  CHANGE  `password`  `password` VARCHAR( 70  )  CHARACTER  SET utf8 COLLATE utf8_bin NOT  NULL ,
+CHANGE  `activation_key`  `activation_key` VARCHAR( 70  )  CHARACTER  SET utf8 COLLATE utf8_bin NOT  NULL ;
